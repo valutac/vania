@@ -7,7 +7,7 @@ LMS_URL=""
 # Install required package
 echo "Install Required Package for Insights"
 sudo apt-get update -y
-sudo apt-get install -y git python-pip python-dev libmysqlclient-dev python-mysqldb build-essential
+sudo apt-get install -y git python-pip python-dev libssl-dev libffi-dev libmysqlclient-dev python-mysqldb build-essential
 sudo pip install virtualenv
 
 # Generate SSH KEY
