@@ -1,8 +1,17 @@
 #!/bin/bash
+
+# set locales
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+
+# Set Open edX release, currently support ginkgo
 export OPENEDX_RELEASE=open-release/ginkgo.master
 
-INSIGHTS_URL=""
-LMS_URL=""
+read -p 'Enter Insight URL: ' insighturl
+read -p 'Enter LMS URL: ' lmsurl
+
+INSIGHTS_URL="$insighturl"
+LMS_URL="$lmsurl"
 
 # Install required package
 echo "Install Required Package for Insights"
@@ -45,7 +54,7 @@ sleep 60
 
 # Setup Analytic Pipeline
 echo "Setup Analytics Pipeline"
-
+cd ~
 # Create Pipeline virtualenv
 echo "Making pipeline virtualenv"
 virtualenv pipeline
@@ -55,4 +64,12 @@ virtualenv pipeline
 echo "Check out pipeline"
 git clone -b $OPENEDX_RELEASE https://github.com/edx/edx-analytics-pipeline
 cd edx-analytics-pipeline
+pip install -r requirements/pip.txt
+pip install -r requirements/base.txt --no-cache-dir
+python setup.py install --force
 
+# Running Pipeling
+echo "Running Pipeline"
+remote-task --host localhost --repo https://github.com/edx/edx-analytics-pipeline --user ubuntu --override-config $HOME/edx-analytics-pipeline/config/devstack.cfg --remote-name analyticstack --wait TotalEventsDailyTask --interval 2018 --output-root hdfs://localhost:9000/output/ --local-scheduler
+
+echo "Installation completed"
