@@ -8,10 +8,16 @@ export LC_CTYPE="en_US.UTF-8"
 read -p 'Specify the Open edX release (example: open-release/hawthorn.master): ' openedxrelease
 read -p 'Enter Insight URL: ' insighturl
 read -p 'Enter LMS URL: ' lmsurl
+read -p 'Enter LMS MYSQL Password (find it on lms.auth.json): ' dbpassword
 
+# Set variable
 OPENEDX_RELEASE="$openedxrelease"
 INSIGHTS_URL="$insighturl"
 LMS_URL="$lmsurl"
+DB_USERNAME="edxapp001"
+DB_HOST="localhost"
+DB_PASSWORD="$dbpassword"
+DB_PORT="3306"
 
 # Install required package
 echo "Install Required Package for Insights"
@@ -67,6 +73,11 @@ cd edx-analytics-pipeline
 pip install -r requirements/pip.txt
 pip install -r requirements/base.txt --no-cache-dir
 python setup.py install --force
+
+# Update Database credentials
+cat <<EOF > /edx/etc/edx-analytics-pipeline/input.json
+{"username": $DB_USERNAME, "host": $DB_HOST, "password": $DB_PASSWORD, "port": $DB_PORT}
+EOF
 
 # Running Pipeline
 echo "Running Pipeline"
