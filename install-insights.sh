@@ -5,11 +5,11 @@ export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
 # Set Open edX release, currently support ginkgo
-export OPENEDX_RELEASE=open-release/ginkgo.master
-
+read -p 'Specify the Open edX release (example: open-release/hawthorn.master): ' openedxrelease
 read -p 'Enter Insight URL: ' insighturl
 read -p 'Enter LMS URL: ' lmsurl
 
+OPENEDX_RELEASE="$openedxrelease"
 INSIGHTS_URL="$insighturl"
 LMS_URL="$lmsurl"
 
@@ -67,10 +67,11 @@ cd edx-analytics-pipeline
 pip install -r requirements/pip.txt
 pip install -r requirements/base.txt --no-cache-dir
 python setup.py install --force
+#Re-run make bootstrap
+make bootstrap
 
-# Running Pipeling
+# Running Pipeline
 echo "Running Pipeline"
-remote-task --host localhost --repo
-https://github.com/edx/edx-analytics-pipeline --user $USER --override-config $HOME/edx-analytics-pipeline/config/devstack.cfg --remote-name analyticstack --wait TotalEventsDailyTask --interval 2018 --output-root hdfs://localhost:9000/output/ --local-scheduler
+remote-task --host localhost --repo https://github.com/edx/edx-analytics-pipeline --user $USER --override-config $HOME/edx-analytics-pipeline/config/devstack.cfg --remote-name analyticstack --wait TotalEventsDailyTask --interval 2018 --output-root hdfs://localhost:9000/output/ --local-scheduler
 
 echo "Installation completed"
