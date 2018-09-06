@@ -67,8 +67,6 @@ cd edx-analytics-pipeline
 pip install -r requirements/pip.txt
 pip install -r requirements/base.txt --no-cache-dir
 python setup.py install --force
-#Re-run make bootstrap
-make bootstrap
 
 # Running Pipeline
 echo "Running Pipeline"
