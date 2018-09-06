@@ -8,7 +8,7 @@ options=(
     "Restart LMS"
     "Restart CMS"
     "Restart edxapp_worker"
-		"Install Open edX Insight"
+		"Install Open edX Insight (Don't run this on your LMS Server)"
     "Quit"
 )
 PS3="Select your Open edX task (1-8): "
