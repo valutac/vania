@@ -70,6 +70,7 @@ python setup.py install --force
 
 # Running Pipeling
 echo "Running Pipeline"
-remote-task --host localhost --repo https://github.com/edx/edx-analytics-pipeline --user ubuntu --override-config $HOME/edx-analytics-pipeline/config/devstack.cfg --remote-name analyticstack --wait TotalEventsDailyTask --interval 2018 --output-root hdfs://localhost:9000/output/ --local-scheduler
+remote-task --host localhost --repo
+https://github.com/edx/edx-analytics-pipeline --user $USER --override-config $HOME/edx-analytics-pipeline/config/devstack.cfg --remote-name analyticstack --wait TotalEventsDailyTask --interval 2018 --output-root hdfs://localhost:9000/output/ --local-scheduler
 
 echo "Installation completed"
