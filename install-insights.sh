@@ -8,14 +8,16 @@ export LC_CTYPE="en_US.UTF-8"
 read -p 'Specify the Open edX release (example: open-release/hawthorn.master): ' openedxrelease
 read -p 'Enter Insight URL: ' insighturl
 read -p 'Enter LMS URL: ' lmsurl
-read -p 'Enter LMS MYSQL Password (find it on lms.auth.json): ' dbpassword
+read -p 'Enter MYSQL HOST: ' dbhost
+read -p 'Enter MYSQL Username: ' dbusername
+read -p 'Enter MYSQL Password (find it on lms.auth.json): ' dbpassword
 
 # Set variable
 OPENEDX_RELEASE="$openedxrelease"
 INSIGHTS_URL="$insighturl"
 LMS_URL="$lmsurl"
-DB_USERNAME="edxapp001"
-DB_HOST="localhost"
+DB_USERNAME="$dbusername"
+DB_HOST="$dbhost"
 DB_PASSWORD="$dbpassword"
 DB_PORT="3306"
 
