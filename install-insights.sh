@@ -37,7 +37,7 @@ virtualenv ansible
 . ansible/bin/activate
 
 # Clone Repository
-git clone -b $OPENEDX_RELEASE https://github.com/ariestiyansyah/configuration.git
+git clone -b $OPENEDX_RELEASE https://github.com/edx/configuration.git
 cd configuration/
 pip install -r requirements.txt
 cd playbooks/edx-east/
@@ -45,7 +45,8 @@ cd playbooks/edx-east/
 # Running Ansible
 echo "Running Ansible, this may take a while..."
 
-ansible-playbook -i localhost, -c local analytics_single.yml --extra-vars "INSIGHTS_LMS_BASE=$LMS_URL INSIGHTS_BASE_URL=$INSIGHTS_URL"
+ansible-playbook -i localhost, -c local analytics_single.yml --extra-vars
+"INSIGHTS_LMS_BASE=$LMS_URL INSIGHTS_BASE_URL=$INSIGHTS_URL INSIGHTS_VERSION=$OPENEDX_RELEASE ANALYTICS_API_VERSION=$OPENEDX_RELEASE"
 
 # Copy Trackinglog, make sure you download it before
 echo "copy tracking log"
