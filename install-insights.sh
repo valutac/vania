@@ -47,8 +47,7 @@ cd playbooks/edx-east/
 # Running Ansible
 echo "Running Ansible, this may take a while..."
 
-ansible-playbook -i localhost, -c local analytics_single.yml --extra-vars
-"INSIGHTS_LMS_BASE=$LMS_URL INSIGHTS_BASE_URL=$INSIGHTS_URL INSIGHTS_VERSION=$OPENEDX_RELEASE ANALYTICS_API_VERSION=$OPENEDX_RELEASE"
+ansible-playbook -i localhost, -c local analytics_single.yml --extra-vars "INSIGHTS_LMS_BASE=$LMS_URL INSIGHTS_BASE_URL=$INSIGHTS_URL INSIGHTS_VERSION=$OPENEDX_RELEASE ANALYTICS_API_VERSION=$OPENEDX_RELEASE"
 
 # Copy Trackinglog, make sure you download it before
 echo "copy tracking log"
