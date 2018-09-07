@@ -42,7 +42,13 @@ virtualenv ansible
 git clone -b $OPENEDX_RELEASE https://github.com/edx/configuration.git
 cd configuration/
 pip install -r requirements.txt
-cd playbooks/edx-east/
+
+if [$OPENEDX_RELEASE == 'open-release/ginkgo.master' ]
+then
+	cd playbooks/edx-east/
+else
+	cd playbooks/
+fi
 
 # Running Ansible
 echo "Running Ansible, this may take a while..."
