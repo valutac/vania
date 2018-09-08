@@ -43,11 +43,11 @@ git clone -b $OPENEDX_RELEASE https://github.com/edx/configuration.git
 cd configuration/
 pip install -r requirements.txt
 
-if [$OPENEDX_RELEASE == 'open-release/ginkgo.master' ]
+if [ $OPENEDX_RELEASE == 'open-release/ginkgo.master' ]
 then
-	cd playbooks/edx-east/
+    cd playbooks/edx-east/
 else
-	cd playbooks/
+    cd playbooks/
 fi
 
 # Running Ansible
